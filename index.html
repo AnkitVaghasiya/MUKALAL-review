@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rate US</title>
+  <link rel="icon" href="icon.jpg" type="image/jpeg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Rubik:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="main-content">
+      <div class="card">
+        <header>
+            <div class="brand-title">
+              <h1>MUKALAL</h1>
+            <p class="tagline">The Clothing Brand</p>
+            </div>
+              <img src="1Q7A0835.JPG" alt="Storefront Photo" class="storefront-photo">
+        </header>
+        <main class="main-content-style">
+            <div class="star-rating">★★★★★</div>
+          <textarea class="review-textarea" id="reviewText" readonly placeholder="Your review will appear here"></textarea>
+          <button class="copy-btn" onclick="copyAndRedirect()">Copy & Leave Review</button>
+        </main>
+        <div class="instruction">Leave us a Positive Review ❤️</div>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="line"> COPYRIGHT 2025 © All Rights Reserved </div>
+      <div class="line">VETHIQ LUXURY PRIVATE LIMITED</div>
+    </div>
+  </div>
+  <script src="review.js">
+  
+    function showRandomReview() {
+      if (window.reviews && window.reviews.length > 0) {
+        const idx = Math.floor(Math.random() * window.reviews.length);
+        document.getElementById('reviewText').value = window.reviews[idx];
+        // Auto-resize textarea to fit content
+        const textarea = document.getElementById('reviewText');
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+      } else {
+        document.getElementById('reviewText').value = 'No reviews available.';
+      }
+    }
+    window.addEventListener('DOMContentLoaded', showRandomReview);
+    function copyAndRedirect() {
+      const text = document.getElementById('reviewText').value;
+      const reviewUrl = 'https://g.page/r/CQL6YaZ4hugaEBM/review';
+      // For Google Maps app intent (works on Android)
+      const mapsIntent = 'intent://maps.google.com/?q=' + encodeURIComponent(reviewUrl) + '#Intent;package=com.google.android.apps.maps;scheme=https;end';
+      let isAndroid = /Android/i.test(navigator.userAgent);
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          if (isAndroid) {
+            // Try to open in Google Maps app directly
+            window.location.href = mapsIntent;
+            setTimeout(function() {
+              window.open(reviewUrl, '_blank');
+            }, 1200);
+          } else {
+            window.open(reviewUrl, '_blank');
+          }
+        });
+      } else {
+        // fallback for old browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (isAndroid) {
+          window.location.href = mapsIntent;
+          setTimeout(function() {
+            window.open(reviewUrl, '_blank');
+          }, 1200);
+        } else {
+          window.open(reviewUrl, '_blank');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
