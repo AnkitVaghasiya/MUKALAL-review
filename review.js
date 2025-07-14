@@ -519,7 +519,7 @@ function copyAndRedirect() {
   const reviewText = document.getElementById("reviewText").value;
   if (navigator.clipboard) {
     navigator.clipboard.writeText(reviewText).then(() => {
-      window.open("https://g.page/r/CQL6YaZ4hugaEAE/review", "_blank");
+      window.open("https://g.page/r/CbtXZaYs2dSBEBM/review", "_blank");
     }).catch(() => {
       fallbackCopy(reviewText);
     });
@@ -537,7 +537,7 @@ function fallbackCopy(text) {
   textArea.select();
   document.execCommand("copy");
   document.body.removeChild(textArea);
-  window.open("https://g.page/r/CQL6YaZ4hugaEAE/review", "_blank");
+  window.open("https://g.page/r/CbtXZaYs2dSBEBM/review", "_blank");
 }
 
 // ✅ Make sure DOM is ready before loading review
